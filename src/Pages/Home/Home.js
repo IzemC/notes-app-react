@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
-import Link from '@mui/material/Link'
 import Button from '@mui/material/Button'
 import Alert from '@mui/material/Alert'
 import TextField from '@mui/material/TextField'
@@ -113,7 +112,7 @@ function Home() {
             <TextField sx={{ width: '350px' }} label='Title' onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="title" id="title" />
           </div>
           <div>
-            <TextField sx={{ width: '350px' }} label='Note body' multiline rows={4} onChange={(e) => setBody(e.target.value)} value={body} fullWidth variant="outlined" type="text" name="body" id="body" />
+            <TextField sx={{ width: '350px' }} label='Text body' multiline rows={4} onChange={(e) => setBody(e.target.value)} value={body} fullWidth variant="outlined" type="text" name="body" id="body" />
           </div>
           <Button variant='outlined' type="submit">Add</Button>
         </Stack>

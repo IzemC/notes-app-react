@@ -8,6 +8,7 @@ import Link from '@mui/material/Link'
 import Container from '@mui/material/Container'
 import Modal from '@mui/material/Modal'
 import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 import CircularProgress from '@mui/material/CircularProgress'
 import AuthContext from '../../contexts/authContext'
 function Signup() {
@@ -56,9 +57,7 @@ function Signup() {
         setIsError(true);
       setIsAlert(true);
       setMsgAlert(res.data.message);
-      // setTimeout(() => {
-      //   window.location.href = '/';
-      // }, 3000);
+
     } catch (err) {
       setIsAlert(true);
       setIsError(true);
@@ -70,9 +69,6 @@ function Signup() {
     <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <Modal
         open={isLoading}
-        onClose={() => { }}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
       >
         <Box sx={{ margin: 0, position: "absolute", top: "50%", left: "50%" }}
         >
@@ -80,7 +76,8 @@ function Signup() {
         </Box>
 
       </Modal>
-      <h1>Notes App</h1>
+      <Typography variant='h2' sx={{ margin: '1em 0' }}>Notes App</Typography>
+      <Typography variant='h3'>Sign up</Typography>
       <form onSubmit={handleSubmit}>
         <Stack spacing={2} sx={{ alignItems: 'center' }}>
           <div style={{ minHeight: '48px' }}>
