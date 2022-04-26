@@ -29,13 +29,13 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
     if (password != cPassword) {
       setIsAlert(true);
       setIsError(true);
       setMsgAlert('Passwords dosen\'t match');
       return
     }
+    setIsLoading(true);
     try {
       let res = await axios.post('/api/auth/register', {
         firstName,
