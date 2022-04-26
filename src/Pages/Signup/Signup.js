@@ -45,7 +45,6 @@ function Signup() {
       if (res.data.success) {
         setIsError(false);
         localStorage.setItem('authToken', res.data.authToken);
-        localStorage.setItem('authToken', res.data.user.authToken);
         localStorage.setItem('firstName', res.data.user.firstName);
         localStorage.setItem('lastName', res.data.user.lastName);
         localStorage.setItem('email', res.data.user.email);
