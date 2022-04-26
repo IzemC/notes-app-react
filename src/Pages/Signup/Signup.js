@@ -51,7 +51,7 @@ function Signup() {
         localStorage.setItem('email', res.data.user.email);
         localStorage.setItem('createdAt', res.data.user.createdAt);
         localStorage.setItem('updatedAt', res.data.user.updatedAt);
-        setAuthState({ isAuth: true, token: res.data.user.authToken });
+        setAuthState({ isAuth: true, token: res.data.authToken });
       }
       else
         setIsError(true);
