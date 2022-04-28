@@ -29,6 +29,7 @@ function Login() {
   const handleSubmit = async (e) => {
 
     e.preventDefault();
+    setIsLoading(true);
     try {
       let res = await axios.get('/api/auth/login', {
         params: {
@@ -57,6 +58,7 @@ function Login() {
       setIsError(true);
       setMsgAlert('Server Error');
     }
+    setIsLoading(false);
   }
   return (
 

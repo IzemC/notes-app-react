@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography'
 
 function NoteCard(props) {
 
-    const { id, title, body, setIsNotesLoading, setNotes, notes, setInfoSnackbar, setOpenSnackbar } = props
+    const { id, title, body, createdAt, setIsNotesLoading, setNotes, notes, setInfoSnackbar, setOpenSnackbar } = props
     const authToken = localStorage.getItem('authToken');
 
     const deleteNoteHandler = async () => {
@@ -32,6 +32,9 @@ function NoteCard(props) {
             <CardHeader title={title} />
             <CardContent>
                 <Typography>{body}</Typography>
+            </CardContent>
+            <CardContent>
+                <Typography>Note written the {new Date(createdAt).toLocaleString()}</Typography>
             </CardContent>
             <CardActions>
                 <Button variant='outlined' color='error' onClick={deleteNoteHandler}>Delete</Button>

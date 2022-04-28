@@ -8,9 +8,14 @@ import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Snackbar from '@mui/material/Snackbar'
+import Switch from '@mui/material/Switch'
+import FormControlLabel from '@mui/material/FormControlLabel'
 import CircularProgress from '@mui/material/CircularProgress';
 import AuthContext from '../../contexts/authContext'
-import NoteCard from '../../Components/Profile/NoteCard'
+import NoteCard from '../../Components/Home/NoteCard'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 
 function Home() {
   const authToken = localStorage.getItem('authToken');
@@ -19,6 +24,8 @@ function Home() {
   const [openSnackbar, setOpenSnackbar] = useState(false)
   const [infoSnackbar, setInfoSnackbar] = useState({ msg: '' })
 
+  const [isDebug, setIsDebug] = useState(false);
+  const [date, setDate] = useState(new Date());
 
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -35,7 +42,7 @@ function Home() {
     setIsNotesLoading(true);
     try {
 
-      let res = await axios.post('/api/notes', { title, body }, { params: { authToken: authToken, }, })
+      let res = await axios.post('/api/notes', { title, body, ...(isDebug && { createdAt: date }) }, { params: { authToken: authToken, }, })
 
       if (res.data.success) setNotes([...notes, res.data.note])
 
@@ -108,6 +115,26 @@ function Home() {
       <form onSubmit={addNoteHandler}>
         <h2 style={{ padding: '1em 0' }}>Add a new note</h2>
         <Stack spacing={2} sx={{ alignItems: 'center' }}>
+          <Grid container direction='row' sx={{ width: 'max-content', minHeight: '56px' }}>
+            <Grid item>
+              <FormControlLabel control={<Switch checked={isDebug} onChange={(e) => setIsDebug(e.target.checked)} />} label={isDebug ? 'Debug ON' : 'Debug OFF'} />
+            </Grid>
+            {isDebug &&
+              <Grid item>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <MobileDateTimePicker
+                    label="Note creation date"
+                    value={date}
+                    onChange={(newDate) => {
+                      setDate(newDate);
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
+              </Grid>
+            }
+          </Grid>
+
           <div>
             <TextField sx={{ width: '350px' }} label='Title' onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="title" id="title" />
           </div>
