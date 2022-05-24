@@ -1,1 +1,1 @@
-live here: [https://notes-app-tahar.tk/]
+live here: https://notes-app-tahar.tk/
